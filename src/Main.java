@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main extends Application implements EventHandler<ActionEvent> {
 
     Button button;
 
@@ -20,6 +20,7 @@ public class Main extends Application {
         primaryStage.setTitle("Заголовок окна");
 
         button = new Button("Нажми меня");
+        button.setOnAction(this);
 
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
@@ -29,6 +30,13 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+    }
+
+    @Override
+    public void handle(ActionEvent event) {
+        if (event.getSource() == button) {
+            System.out.println("Не нажимай на меня! ;(");
+        }
     }
 
 }
