@@ -16,6 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         primaryStage.setTitle("Заголовок окна");
 
         button = new Button("Нажми меня");
@@ -24,8 +25,10 @@ public class Main extends Application {
         layout.getChildren().add(button);
 
         Scene scene = new Scene(layout, 300, 250);
+
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
 }
