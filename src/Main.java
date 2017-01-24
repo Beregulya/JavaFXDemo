@@ -24,8 +24,10 @@ public class Main extends Application  {
         window.setTitle("Title?");
 
         button = new Button("Click Me!");
-        button.setOnAction(e -> AlertBox.display("Title of Window",
-                "WOW! This alert box is amazing!"));
+        button.setOnAction(e -> {
+            boolean result = ConfirmBox.display("Title", "Capture the planet?");
+            System.out.println(result);
+        });
 
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
