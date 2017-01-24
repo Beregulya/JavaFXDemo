@@ -4,8 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Main extends Application  {
@@ -22,26 +21,25 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Title");
 
-        window.setOnCloseRequest(e -> {
-            e.consume();
-            closeProgram();
-        });
+        HBox topMenu = new HBox();
+        Button buttonA = new Button("File");
+        Button buttonB = new Button("Edit");
+        Button buttonC = new Button("View");
+        topMenu.getChildren().addAll(buttonA, buttonB, buttonC);
 
-        button = new Button("Close Program");
-        button.setOnAction(e -> closeProgram());
+        VBox leftMenu = new VBox();
+        Button buttonD = new Button("D");
+        Button buttonE = new Button("E");
+        Button buttonF = new Button("F");
+        leftMenu.getChildren().addAll(buttonD, buttonE, buttonF);
 
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button);
-        Scene scene = new Scene(layout, 300, 250);
+        BorderPane borderPane = new BorderPane();
+        borderPane.setTop(topMenu);
+        borderPane.setLeft(leftMenu);
+
+        Scene scene = new Scene(borderPane, 300, 250);
         window.setScene(scene);
         window.show();
-    }
-
-    private void closeProgram() {
-        Boolean answer = ConfirmBox.display("Title", "Sure you wanna exit?");
-        if (answer)
-            window.close();
-
     }
 
 }
