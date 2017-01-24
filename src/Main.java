@@ -23,7 +23,7 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Title?");
 
-        button = new Button("Click Me");
+        button = new Button("Click Me!");
         button.setOnAction(e -> AlertBox.display("Title of Window",
                 "WOW! This alert box is amazing!"));
 
