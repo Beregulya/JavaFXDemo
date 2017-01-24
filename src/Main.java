@@ -24,9 +24,9 @@ public class Main extends Application  {
         window.setTitle("Demo");
 
         GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(8);
-        grid.setVgap(10);
+        grid.setPadding(new Insets(30));
+        grid.setVgap(30);
+        grid.setHgap(20);
 
         Label nameLabel = new Label("Username:");
         GridPane.setConstraints(nameLabel, 0, 0);
@@ -46,7 +46,7 @@ public class Main extends Application  {
 
         grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton);
 
-        Scene scene = new Scene(grid, 300, 200);
+        Scene scene = new Scene(grid, 350, 200);
         window.setScene(scene);
 
         window.show();
