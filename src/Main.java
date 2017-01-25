@@ -25,29 +25,7 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Demo");
 
-        TreeItem<String> root, nick, steve;
-        root = new TreeItem<>();
-        root.setExpanded(true);
-
-        nick = makeBranch("Nick", root);
-        makeBranch("one", nick);
-        makeBranch("two", nick);
-        makeBranch("three", nick);
-
-        steve = makeBranch("Steve", root);
-        makeBranch("first", steve);
-        makeBranch("second", steve);
-
-        tree = new TreeView<>(root);
-        tree.setShowRoot(false);
-        tree.getSelectionModel().selectedItemProperty()
-                .addListener((v, oldValue, newValue) -> {
-                    if (newValue != null)
-                        System.out.println(newValue.getValue());
-                });
-
         StackPane layout = new StackPane();
-        layout.getChildren().addAll(tree);
         Scene scene = new Scene(layout, 300, 250);
         window.setScene(scene);
         window.show();
