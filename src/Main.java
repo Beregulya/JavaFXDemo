@@ -29,10 +29,10 @@ public class Main extends Application  {
         choiceBox.getItems().add("Apples");
         choiceBox.getItems().add("Bananas");
         choiceBox.getItems().addAll("Bacon", "Ham", "Meatballs");
-
         choiceBox.setValue("Apples");
 
-        button.setOnAction(e -> getChoice(choiceBox));
+        choiceBox.getSelectionModel().selectedItemProperty().addListener(
+                (v, oldValue, newValue) -> System.out.println(newValue));
 
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20, 20, 20, 20));
@@ -41,11 +41,6 @@ public class Main extends Application  {
         scene = new Scene(layout, 300, 250);
         window.setScene(scene);
         window.show();
-    }
-
-    private void getChoice(ChoiceBox<String> choiceBox) {
-        String food = choiceBox.getValue();
-        System.out.println(food);
     }
 
 }
