@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class Main extends Application  {
 
     Stage window;
+    Scene scene;
     Button button;
 
     public static void main(String[] args) {
@@ -23,33 +24,29 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Demo");
 
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(30));
-        grid.setVgap(30);
-        grid.setHgap(20);
+        TextField nameInput = new TextField();
+        button = new Button("Click me");
+        button.setOnAction(e -> isInt(nameInput, nameInput.getText()));
 
-        Label nameLabel = new Label("Username:");
-        GridPane.setConstraints(nameLabel, 0, 0);
+        VBox layout = new VBox(10);
+        layout.setPadding(new Insets(20, 20, 20, 20));
+        layout.getChildren().addAll(nameInput, button);
 
-        TextField nameInput = new TextField("Nick");
-        GridPane.setConstraints(nameInput, 1, 0);
-
-        Label passLabel = new Label("Password:");
-        GridPane.setConstraints(passLabel, 0, 1);
-
-        TextField passInput = new TextField();
-        passInput.setPromptText("print pass here...");
-        GridPane.setConstraints(passInput, 1, 1);
-
-        Button loginButton = new Button("Log In");
-        GridPane.setConstraints(loginButton, 1, 2);
-
-        grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton);
-
-        Scene scene = new Scene(grid, 350, 200);
+        scene = new Scene(layout, 350, 200);
         window.setScene(scene);
 
         window.show();
+    }
+
+    private boolean isInt(TextField input, String message) {
+        try {
+            int age = Integer.parseInt(input.getText());
+            System.out.println("User is: " + age);
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("Error: " + message + " is not a number!");
+            return false;
+        }
     }
 
 }
