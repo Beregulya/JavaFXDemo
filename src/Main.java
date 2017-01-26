@@ -16,7 +16,6 @@ import java.util.Observable;
 public class Main extends Application  {
 
     Stage window;
-    BorderPane layout;
 
     public static void main(String[] args) {
         launch(args);
@@ -27,60 +26,32 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Demo");
 
-        Menu fileMenu = new Menu("File");
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(8);
+        grid.setVgap(10);
 
-        MenuItem newFile = new MenuItem("New...");
-        newFile.setOnAction(e -> System.out.println("Create a new file..."));
-        fileMenu.getItems().add(newFile);
+        Label nameLabel = new Label("Username:");
+        GridPane.setConstraints(nameLabel, 0, 0);
 
-        fileMenu.getItems().add(new MenuItem("Open..."));
-        fileMenu.getItems().add(new MenuItem("Save..."));
-        fileMenu.getItems().add(new SeparatorMenuItem());
-        fileMenu.getItems().add(new MenuItem("Settings..."));
-        fileMenu.getItems().add(new SeparatorMenuItem());
-        fileMenu.getItems().add(new MenuItem("Exit"));
+        TextField nameInput = new TextField();
+        nameInput.setPromptText("print login here...");
+        GridPane.setConstraints(nameInput, 1, 0);
 
-        Menu editMenu = new Menu("_Edit");
+        Label passLabel = new Label("Password:");
+        GridPane.setConstraints(passLabel, 0, 1);
 
-        editMenu.getItems().add(new MenuItem("Cut"));
-        editMenu.getItems().add(new MenuItem("Copy"));
+        TextField passInput = new TextField();
+        passInput.setPromptText("print pass here...");
+        GridPane.setConstraints(passInput, 1, 1);
 
-        MenuItem paste = new MenuItem("Paste");
-        paste.setOnAction(e -> System.out.println("Pasting something"));
-        paste.setDisable(true);
-        editMenu.getItems().add(paste);
+        Button loginButton = new Button("Log In");
+        GridPane.setConstraints(loginButton, 1, 2);
 
-        Menu helpMenu = new Menu("Help");
-        CheckMenuItem showLines = new CheckMenuItem("Show Line Numbers");
-        showLines.setOnAction(e -> {
-            if (showLines.isSelected())
-                System.out.println("Program will nwo display line numbers");
-            else
-                System.out.println("Hiding line numbers");
-        });
-        CheckMenuItem autoSave = new CheckMenuItem("Enable Auto-save");
-        autoSave.setSelected(true);
-        helpMenu.getItems().add(showLines);
+        grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton);
 
-        Menu difficultyMenu = new Menu("Difficulty");
-        ToggleGroup difficultyToggle = new ToggleGroup();
-
-        RadioMenuItem easy = new RadioMenuItem("Easy");
-        RadioMenuItem medium = new RadioMenuItem("Medium");
-        RadioMenuItem hard = new RadioMenuItem("Hard");
-
-        easy.setToggleGroup(difficultyToggle);
-        medium.setToggleGroup(difficultyToggle);
-        hard.setToggleGroup(difficultyToggle);
-
-        difficultyMenu.getItems().addAll(easy, medium, hard);
-
-        MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu, difficultyMenu);
-
-        layout = new BorderPane();
-        layout.setTop(menuBar);
-        Scene scene = new Scene(layout, 400, 300);
+        Scene scene = new Scene(grid, 300, 200);
+        scene.getStylesheets().add("Style.css");
         window.setScene(scene);
         window.show();
     }
