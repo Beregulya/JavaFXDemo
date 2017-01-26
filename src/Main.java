@@ -1,5 +1,7 @@
 import com.sun.javafx.scene.control.skin.ChoiceBoxSkin;
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,20 +29,24 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Demo");
 
-        Human nick = new Human();
-        nick.firstNameProperty().addListener((v, oldValue, newValue) -> {
-            System.out.println("Name changed to: " + newValue);
-            System.out.println("firstNameProperty(): " + nick.firstNameProperty());
-            System.out.println("getFirstName(): " + nick.getFirstName());
-        });
+        IntegerProperty x = new SimpleIntegerProperty(5);
+        IntegerProperty y = new SimpleIntegerProperty();
+
+        y.bind(x.multiply(10));
+
+        System.out.println("x: " + x.getValue());
+        System.out.println("y: " + y.getValue() + "\n");
+
+        x.setValue(7);
+
+        System.out.println("x: " + x.getValue());
+        System.out.println("y: " + y.getValue() + "\n");
 
         Button button = new Button("Submit");
-        button.setOnAction(e -> nick.setFirstName("Genius"));
 
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
         Scene scene = new Scene(layout, 300, 250);
-        scene.getStylesheets().add("Style.css");
         window.setScene(scene);
         window.show();
     }
