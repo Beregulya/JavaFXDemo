@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,24 +30,20 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Demo");
 
-        IntegerProperty x = new SimpleIntegerProperty(5);
-        IntegerProperty y = new SimpleIntegerProperty();
+        TextField userInput = new TextField();
+        userInput.setMaxWidth(200);
+        Label firstLabel = new Label("Welcome to the site ");
+        Label secondLabel = new Label();
 
-        y.bind(x.multiply(10));
+        HBox bottomText = new HBox(firstLabel, secondLabel);
+        bottomText.setAlignment(Pos.CENTER);
 
-        System.out.println("x: " + x.getValue());
-        System.out.println("y: " + y.getValue() + "\n");
+        VBox vBox = new VBox(10, userInput, bottomText);
+        vBox.setAlignment(Pos.CENTER);
 
-        x.setValue(7);
+        secondLabel.textProperty().bind(userInput.textProperty());
 
-        System.out.println("x: " + x.getValue());
-        System.out.println("y: " + y.getValue() + "\n");
-
-        Button button = new Button("Submit");
-
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button);
-        Scene scene = new Scene(layout, 300, 250);
+        Scene scene = new Scene(vBox, 300, 200);
         window.setScene(scene);
         window.show();
     }
