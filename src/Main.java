@@ -17,6 +17,7 @@ public class Main extends Application  {
 
     Stage window;
     TableView<Product> table;
+    TextField nameInput, priceInput, quantityInput;
 
     public static void main(String[] args) {
         launch(args);
@@ -39,12 +40,32 @@ public class Main extends Application  {
         quantityColumn.setMinWidth(100);
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
+        nameInput = new TextField();
+        nameInput.setPromptText("Name");
+        nameInput.setMinWidth(100);
+
+        priceInput = new TextField();
+        priceInput.setPromptText("Price");
+        priceInput.setMinWidth(100);
+
+        quantityInput = new TextField();
+        quantityInput.setPromptText("Quantity");
+        quantityInput.setMinWidth(100);
+
+        Button addButton = new Button("Add");
+        Button deleteButton = new Button("Delete");
+
+        HBox hBox = new HBox();
+        hBox.setPadding(new Insets(10, 10, 10, 10));
+        hBox.setSpacing(10);
+        hBox.getChildren().addAll(nameInput, priceInput, quantityInput, addButton, deleteButton);
+
         table = new TableView<>();
         table.setItems(getProduct());
         table.getColumns().addAll(nameColumn, priceColumn, quantityColumn);
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(table);
+        vBox.getChildren().addAll(table, hBox);
 
         Scene scene = new Scene(vBox);
         window.setScene(scene);
