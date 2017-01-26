@@ -29,9 +29,10 @@ public class Main extends Application  {
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(8);
-        grid.setVgap(10);
+        grid.setHgap(10);
 
         Label nameLabel = new Label("Username:");
+        nameLabel.setId("bold-label");
         GridPane.setConstraints(nameLabel, 0, 0);
 
         TextField nameInput = new TextField();
@@ -48,7 +49,11 @@ public class Main extends Application  {
         Button loginButton = new Button("Log In");
         GridPane.setConstraints(loginButton, 1, 2);
 
-        grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton);
+        Button signUpButton = new Button("Sign Up");
+        signUpButton.getStyleClass().add("button-blue");
+        GridPane.setConstraints(signUpButton, 1, 3);
+
+        grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton, signUpButton);
 
         Scene scene = new Scene(grid, 300, 200);
         scene.getStylesheets().add("Style.css");
