@@ -50,8 +50,22 @@ public class Main extends Application  {
         paste.setDisable(true);
         editMenu.getItems().add(paste);
 
+        Menu helpMenu = new Menu("Help");
+        CheckMenuItem showLines = new CheckMenuItem("Show Line Numbers");
+        showLines.setOnAction(e -> {
+            if (showLines.isSelected())
+                System.out.println("Program will nwo display line numbers");
+            else
+                System.out.println("Hiding line numbers");
+        });
+        CheckMenuItem autoSave = new CheckMenuItem("Enable Auto-save");
+        autoSave.setSelected(true);
+        helpMenu.getItems().add(showLines);
+
+
+
         MenuBar menuBar = new MenuBar();
-        menuBar.getMenus().addAll(fileMenu, editMenu);
+        menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
 
         layout = new BorderPane();
         layout.setTop(menuBar);
