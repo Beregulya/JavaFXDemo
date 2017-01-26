@@ -16,6 +16,7 @@ import java.util.Observable;
 public class Main extends Application  {
 
     Stage window;
+    Button button;
 
     public static void main(String[] args) {
         launch(args);
@@ -26,36 +27,19 @@ public class Main extends Application  {
         window = primaryStage;
         window.setTitle("Demo");
 
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(8);
-        grid.setHgap(10);
+        Human nick = new Human();
+        nick.firstNameProperty().addListener((v, oldValue, newValue) -> {
+            System.out.println("Name changed to: " + newValue);
+            System.out.println("firstNameProperty(): " + nick.firstNameProperty());
+            System.out.println("getFirstName(): " + nick.getFirstName());
+        });
 
-        Label nameLabel = new Label("Username:");
-        nameLabel.setId("bold-label");
-        GridPane.setConstraints(nameLabel, 0, 0);
+        Button button = new Button("Submit");
+        button.setOnAction(e -> nick.setFirstName("Genius"));
 
-        TextField nameInput = new TextField();
-        nameInput.setPromptText("print login here...");
-        GridPane.setConstraints(nameInput, 1, 0);
-
-        Label passLabel = new Label("Password:");
-        GridPane.setConstraints(passLabel, 0, 1);
-
-        TextField passInput = new TextField();
-        passInput.setPromptText("print pass here...");
-        GridPane.setConstraints(passInput, 1, 1);
-
-        Button loginButton = new Button("Log In");
-        GridPane.setConstraints(loginButton, 1, 2);
-
-        Button signUpButton = new Button("Sign Up");
-        signUpButton.getStyleClass().add("button-blue");
-        GridPane.setConstraints(signUpButton, 1, 3);
-
-        grid.getChildren().addAll(nameLabel, nameInput, passLabel, passInput, loginButton, signUpButton);
-
-        Scene scene = new Scene(grid, 300, 200);
+        StackPane layout = new StackPane();
+        layout.getChildren().add(button);
+        Scene scene = new Scene(layout, 300, 250);
         scene.getStylesheets().add("Style.css");
         window.setScene(scene);
         window.show();
